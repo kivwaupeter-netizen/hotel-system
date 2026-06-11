@@ -110,6 +110,11 @@ function getRoomImage($room) {
             <p style="font-size:18px; color:#666; margin-bottom:20px;">No rooms found matching your search. Try adjusting your filters.</p>
             <a href="<?php echo BASE_URL; ?>/rooms.php" class="btn-primary">View All Rooms</a>
         </div>
+        <?php if (empty($rooms)): ?>
+        <div class="empty-state" style="text-align:center; padding:60px 20px;">
+            <p style="font-size:18px; color:#666; margin-bottom:20px;">No rooms found matching your search. Try adjusting your filters.</p>
+            <a href="<?php echo BASE_URL; ?>/rooms.php" class="btn-primary">View All Rooms</a>
+        </div>
     <?php else: ?>
         <div class="rooms-grid">
             <?php foreach ($rooms as $room): ?>
