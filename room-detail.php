@@ -44,9 +44,13 @@ $imageUrl = !empty($room['main_image'])
 
 <div style="width:100%; height:480px; overflow:hidden; position:relative;">
     <img id="room-main-img"
-         src="<?php echo $imageUrl; ?>"
-         alt="<?php echo htmlspecialchars($room['name']); ?>"
-         style="width:100%; height:100%; object-fit:cover; display:block; transition: opacity 0.5s ease;">
+     src="<?php echo $imageUrl; ?>"
+     class="lightbox-trigger"
+     data-gallery="<?php echo isset($galleryJson) ? $galleryJson : htmlspecialchars(json_encode([$imageUrl])); ?>"
+     data-index="0"
+     data-caption="<?php echo htmlspecialchars($room['name']); ?>"
+     style="width:100%; height:100%; object-fit:cover; display:block; transition:opacity 0.5s ease; cursor:zoom-in;"
+         alt="<?php echo htmlspecialchars($room['name']); ?>">
 </div>
 
 <?php
@@ -74,13 +78,20 @@ $gallery = $galleryImages[$room['id']] ?? [];
 ?>
 
 <?php if (!empty($gallery)): ?>
-<div style="display:flex; gap:10px; padding:10px 0; max-width:100%; overflow-x:auto;">
-    <?php foreach ($gallery as $img): ?>
+<div style="display:flex; gap:10px; padding:10px 0; flex-wrap:wrap;">
+    <?php
+    $galleryJson = htmlspecialchars(json_encode($gallery), ENT_QUOTES);
+    foreach ($gallery as $index => $img): ?>
     <img src="<?php echo $img; ?>"
+         class="lightbox-trigger gallery-thumb"
+         data-gallery="<?php echo $galleryJson; ?>"
+         data-index="<?php echo $index; ?>"
+         data-caption="<?php echo htmlspecialchars($room['name']); ?>"
          onclick="document.getElementById('room-main-img').src='<?php echo $img; ?>'"
-         style="width:120px; height:80px; object-fit:cover; border-radius:8px; cursor:pointer; flex-shrink:0; border:3px solid transparent; transition:border 0.2s;"
-         onmouseover="this.style.border='3px solid #2d6a4f'"
-         onmouseout="this.style.border='3px solid transparent'">
+         style="width:110px; height:75px; object-fit:cover; border-radius:8px; cursor:pointer; border:3px solid transparent; transition:all 0.3s ease;"
+         onmouseover="this.style.border='3px solid #2d6a4f'; this.style.transform='scale(1.05)'"
+         onmouseout="this.style.border='3px solid transparent'; this.style.transform='scale(1)'"
+         alt="<?php echo htmlspecialchars($room['name']); ?> photo <?php echo $index + 1; ?>">
     <?php endforeach; ?>
 </div>
 <?php endif; ?>

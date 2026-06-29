@@ -5,8 +5,8 @@ if (session_status() === PHP_SESSION_NONE) {
 
 define('SITE_NAME',       'Phantom Ridge Resort');
 define('SITE_EMAIL',      'info@phantomridgeresort.co.ke');
-define('SITE_PHONE',      '+254 700 000 000');
-define('SITE_ADDRESS',    'Nyeri, Kenya');
+define('SITE_PHONE',      '+254 710199008');
+define('SITE_ADDRESS',    'Chuka, Kenya');
 define('BASE_URL',        'http://localhost/hotel-system');
 define('DB_HOST',         'localhost');
 define('DB_USER',         'root');

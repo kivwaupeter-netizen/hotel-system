@@ -26,7 +26,7 @@ require_once 'includes/header.php';
         <div style="width:60px; height:4px; background:#2d6a4f; border-radius:2px; margin-bottom:24px;"></div>
         <p style="font-size:16px; color:#555; line-height:1.9; margin-bottom:16px;">
             Phantom Ridge Resort is a luxury BnB retreat nestled in the heart of Nyeri, Kenya. We were founded
-            with a single vision — to offer every guest an authentic highland experience, surrounded by the
+            with a single vision to offer every guest an authentic highland experience, surrounded by the
             breathtaking beauty of Kenya's nature, fresh mountain air, and the genuine warmth of Kenyan hospitality.
         </p>
         <p style="font-size:16px; color:#555; line-height:1.9;">
@@ -72,7 +72,7 @@ require_once 'includes/header.php';
                  style="width:100px; height:100px; border-radius:50%; object-fit:cover; margin:0 auto 16px; display:block; border:4px solid #2d6a4f;">
             <h3>James Mwangi</h3>
             <p style="color:#2d6a4f; font-weight:600; font-size:14px;">General Manager</p>
-            <p style="margin-top:8px;">Over 15 years of hospitality leadership across East Africa's finest resorts.</p>
+            <p style="margin-top:8px;">Over 10 years of hospitality leadership across East Africa's finest resorts.</p>
         </div>
         <div class="why-card">
             <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face&q=80"

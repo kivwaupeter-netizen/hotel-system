@@ -33,8 +33,8 @@ require_once __DIR__ . '/flash.php';
         <a href="<?php echo BASE_URL; ?>/contact.php">Contact</a>
     </div>
 
-    <div class="nav-auth">
-        <?php if (!isLoggedIn()): ?>
+<div class="nav-auth" id="nav-auth">
+            <?php if (!isLoggedIn()): ?>
             <a href="<?php echo BASE_URL; ?>/auth/login.php" class="btn-login">Login</a>
             <a href="<?php echo BASE_URL; ?>/auth/register.php" class="btn-register">Register</a>
         <?php else: ?>

@@ -15,6 +15,16 @@ require_once '../../includes/admin_check.php';
 </head>
 <body>
 
+<div id="loading-screen">
+    <div class="loader-content">
+        <div class="loader-logo">Phantom Ridge Resort</div>
+        <div class="loader-tagline">Experience Luxury in Kenya</div>
+        <div class="loader-bar">
+            <div class="loader-progress"></div>
+        </div>
+    </div>
+</div>
+
 <div class="admin-layout">
 
     <?php require_once __DIR__ . '/admin-sidebar.php'; ?>

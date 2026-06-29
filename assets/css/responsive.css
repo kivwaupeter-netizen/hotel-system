@@ -11,30 +11,38 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .hero h1 {
-        font-size: 38px;
+    .hero-content h1 {
+        font-size: 48px;
+    }
+
+    .experience-grid {
+        gap: 40px;
+    }
+
+    .testimonial-card {
+        min-width: 300px;
     }
 }
 
 @media (max-width: 768px) {
     .hamburger {
-        display:          block;
-        background:       none;
-        border:           none;
-        cursor:           pointer;
-        padding:          8px;
-        display:          flex;
-        flex-direction:   column;
-        gap:              5px;
+        display:        flex;
+        flex-direction: column;
+        gap:            5px;
+        background:     none;
+        border:         none;
+        cursor:         pointer;
+        padding:        8px;
+        z-index:        1001;
     }
 
     .hamburger span {
-        display:          block;
-        width:            25px;
-        height:           3px;
-        background:       var(--accent);
-        border-radius:    3px;
-        transition:       var(--transition);
+        display:       block;
+        width:         25px;
+        height:        3px;
+        background:    var(--accent);
+        border-radius: 3px;
+        transition:    var(--transition);
     }
 
     .nav-links {
@@ -44,7 +52,7 @@
     .nav-links.nav-open {
         display:        flex;
         flex-direction: column;
-        position:       absolute;
+        position:       fixed;
         top:            70px;
         left:           0;
         width:          100%;
@@ -73,6 +81,59 @@
         padding:   15px 20px;
     }
 
+    .hero-content h1 {
+        font-size: 32px;
+    }
+
+    .hero-content p {
+        font-size: 16px;
+    }
+
+    .hero-stats {
+        gap:       20px;
+        flex-wrap: wrap;
+    }
+
+    .hero-stat strong {
+        font-size: 22px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items:    center;
+    }
+
+    .btn-hero-primary,
+    .btn-hero-secondary {
+        width:      100%;
+        text-align: center;
+    }
+
+    .slide-dots {
+        bottom: 160px;
+    }
+
+    .search-bar-floating {
+        margin:  10px 20px 0;
+        padding: 20px;
+    }
+
+    .search-bar-floating form {
+        flex-direction: column;
+    }
+
+    .search-divider {
+        display: none;
+    }
+
+    .search-bar-floating .search-field {
+        width: 100%;
+    }
+
+    .btn-search {
+        width: 100%;
+    }
+
     .rooms-grid {
         grid-template-columns: 1fr;
     }
@@ -81,20 +142,13 @@
         grid-template-columns: 1fr;
     }
 
-    .hero h1 {
-        font-size: 30px;
+    .experience-grid {
+        grid-template-columns: 1fr;
+        gap:                   40px;
     }
 
-    .search-form {
-        flex-direction: column;
-    }
-
-    .search-field {
-        width: 100%;
-    }
-
-    .search-field input {
-        width: 100%;
+    .experience-images {
+        height: 300px;
     }
 
     .room-detail-grid {
@@ -110,7 +164,23 @@
     }
 
     .section {
-        padding: 40px 20px;
+        padding: 60px 20px;
+    }
+
+    .testimonials-section {
+        padding: 60px 20px;
+    }
+
+    .testimonial-card {
+        min-width: calc(100vw - 60px);
+    }
+
+    .experience-section {
+        padding: 60px 20px;
+    }
+
+    .hero-slider {
+        height: 100vh;
     }
 
     form .btn-primary,
@@ -126,31 +196,51 @@
     .contact-layout {
         grid-template-columns: 1fr;
     }
+
+    .room-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-content .admin-table-wrapper {
+        overflow-x: auto;
+    }
 }
 
 @media (max-width: 480px) {
-    .hero h1 {
-        font-size: 24px;
+    .hero-content h1 {
+        font-size: 26px;
     }
 
-    .hero p {
-        font-size: 16px;
+    .hero-content p {
+        font-size: 14px;
+    }
+
+    .hero-badge {
+        font-size: 11px;
+        padding:   6px 14px;
     }
 
     .section h2 {
         font-size: 26px;
     }
 
-    .room-card .btn-primary,
-    .room-card .btn-secondary,
-    .card-body .btn-primary,
-    .card-body .btn-secondary {
-        display: block;
-        width:   100%;
+    .experience-text h2 {
+        font-size: 28px;
     }
 
-    .admin-content .admin-table-wrapper {
-        overflow-x: auto;
+    .testimonials-section h2 {
+        font-size: 26px;
+    }
+
+    .testimonial-card {
+        min-width:     calc(100vw - 40px);
+        padding:       24px;
+    }
+
+    .room-card .btn-primary,
+    .card-body .btn-primary {
+        display: block;
+        width:   100%;
     }
 
     .stats-grid {
@@ -163,5 +253,17 @@
 
     .auth-card {
         padding: 28px 20px;
+    }
+
+    #back-to-top {
+        bottom: 20px;
+        right:  20px;
+        width:  44px;
+        height: 44px;
+    }
+
+    .slide-arrows button {
+        width:  38px;
+        height: 38px;
     }
 }

@@ -28,6 +28,76 @@ $featuredRooms = [
 ];
 ?>
 
+<style>
+/* Hero Slider Hardware Acceleration & Transitions */
+.hero-slider {
+    position: relative;
+    overflow: hidden;
+    height: 80vh;
+    min-height: 500px;
+    width: 100%;
+}
+.hero-slider .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+}
+.hero-slider .slide.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+}
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 3;
+}
+.hero-content {
+    position: relative;
+    z-index: 4;
+}
+.slide-dots, .slide-arrows button {
+    z-index: 5;
+}
+
+/* Testimonials Carousel Track and Mask Styles */
+.testimonials-track-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 20px 0;
+}
+.testimonials-track {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    width: 100%;
+}
+.testimonial-card {
+    flex: 0 0 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px;
+}
+@media (min-width: 768px) {
+    .testimonial-card {
+        flex: 0 0 33.333%;
+        width: 33.333%;
+    }
+}
+</style>
+
 <div class="hero-slider" id="hero-slider">
     <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80')"></div>
     <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1600&q=80')"></div>
@@ -104,20 +174,36 @@ $featuredRooms = [
         ?>
         <div class="room-card">
             <div class="card-image-wrapper">
-                <img src="<?php echo $imgSrc; ?>" alt="<?php echo $room ? htmlspecialchars($room['name']) : getTypeLabel($type); ?>">
+                <img src="<?php echo $imgSrc; ?>"
+                     alt="<?php echo $room ? htmlspecialchars($room['name']) : getTypeLabel($type); ?>">
                 <div class="card-image-overlay">
                     <?php if ($room): ?>
-                        <a href="<?php echo BASE_URL; ?>/room-detail.php?id=<?php echo $room['id']; ?>" class="btn-primary">View Details</a>
+                        <a href="<?php echo BASE_URL; ?>/room-detail.php?id=<?php echo $room['id']; ?>"
+                           class="btn-primary">View Details</a>
                     <?php endif; ?>
                 </div>
             </div>
             <div class="card-body">
-                <span class="<?php echo getTypeBadgeClass($type); ?>"><?php echo getTypeLabel($type); ?></span>
+                <span class="<?php echo getTypeBadgeClass($type); ?>">
+                    <?php echo getTypeLabel($type); ?>
+                </span>
                 <?php if ($room): ?>
                     <h3><?php echo htmlspecialchars($room['name']); ?></h3>
-                    <div class="card-price"><?php echo formatKES($room['price_per_night']); ?> <small>/ night</small></div>
+                    <div class="card-price">
+                        <?php echo formatKES($room['price_per_night']); ?>
+                        <small>/ night</small>
+                    </div>
                     <p>👥 Max <?php echo $room['max_guests']; ?> guests</p>
-                    <p class="card-desc"><?php $desc = htmlspecialchars($room['description']); echo strlen($desc) > 100 ? substr($desc, 0, 100) . '...' : $desc; ?></p>
+                    <p class="card-desc">
+                        <?php
+                        $desc = htmlspecialchars($room['description']);
+                        echo strlen($desc) > 100 ? substr($desc, 0, 100) . '...' : $desc;
+                        ?>
+                    </p>
+                    <a href="<?php echo BASE_URL; ?>/room-detail.php?id=<?php echo $room['id']; ?>"
+                       class="btn-primary" style="display:block; text-align:center; margin-top:12px;">
+                        View Details
+                    </a>
                 <?php else: ?>
                     <h3><?php echo getTypeLabel($type); ?> Room</h3>
                     <p class="card-desc">Coming soon.</p>
@@ -135,9 +221,27 @@ $featuredRooms = [
             <h2>More Than Just a Stay</h2>
             <p>Phantom Ridge Resort is nestled in the heart of Kenya's highlands, offering an escape from the ordinary. Every detail is curated to give you an experience you will never forget.</p>
             <div class="experience-features">
-                <div class="exp-feature"><span>🌿</span><div><strong>Nature Immersion</strong><p>Surrounded by Kenya's breathtaking highland scenery</p></div></div>
-                <div class="exp-feature"><span>🍽️</span><div><strong>Fine Dining</strong><p>Authentic Kenyan cuisine and international dishes</p></div></div>
-                <div class="exp-feature"><span>🧖</span><div><strong>Spa & Wellness</strong><p>Rejuvenate your body and mind in our luxury spa</p></div></div>
+                <div class="exp-feature">
+                    <span>🌿</span>
+                    <div>
+                        <strong>Nature Immersion</strong>
+                        <p>Surrounded by Kenya's breathtaking highland scenery</p>
+                    </div>
+                </div>
+                <div class="exp-feature">
+                    <span>🍽️</span>
+                    <div>
+                        <strong>Fine Dining</strong>
+                        <p>Authentic Kenyan cuisine and international dishes</p>
+                    </div>
+                </div>
+                <div class="exp-feature">
+                    <span>🧖</span>
+                    <div>
+                        <strong>Spa & Wellness</strong>
+                        <p>Rejuvenate your body and mind in our luxury spa</p>
+                    </div>
+                </div>
             </div>
             <a href="<?php echo BASE_URL; ?>/about.php" class="btn-primary">Discover More</a>
         </div>
@@ -149,13 +253,112 @@ $featuredRooms = [
     </div>
 </section>
 
+<section class="testimonials-section">
+    <div style="max-width:1200px; margin:0 auto; padding: 0 15px;">
+        <h2>What Our Guests Say</h2>
+        <div class="section-line"></div>
+        <div class="testimonials-track-wrapper">
+            <div class="testimonials-track" id="testimonials-track">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">Phantom Ridge Resort exceeded every expectation. The highland views were breathtaking and the staff made us feel like royalty from the moment we arrived.</p>
+                    <div class="testimonial-author">
+                        <img class="testimonial-avatar"
+                             src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face&q=80"
+                             alt="James Mwenda">
+                        <div class="testimonial-author-info">
+                            <strong>James Mwenda</strong>
+                            <span>Nairobi, Kenya</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">The Luxury Villa was absolutely stunning. Private, peaceful, and perfectly designed. We celebrated our anniversary here and it was unforgettable.</p>
+                    <div class="testimonial-author">
+                        <img class="testimonial-avatar"
+                             src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face&q=80"
+                             alt="Grace Njeri">
+                        <div class="testimonial-author-info">
+                            <strong>Grace Njeri</strong>
+                            <span>Mombasa, Kenya</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">We booked the Garden Suite for our family of four and it was perfect. The pool, the food, the service — everything was world class. We are definitely coming back.</p>
+                    <div class="testimonial-author">
+                        <img class="testimonial-avatar"
+                             src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face&q=80"
+                             alt="Brian Ochieng">
+                        <div class="testimonial-author-info">
+                            <strong>Brian Ochieng</strong>
+                            <span>Kisumu, Kenya</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">Affordable yet so comfortable. The Savannah Room was cozy, clean and had everything we needed. The breakfast was delicious. Great value for money.</p>
+                    <div class="testimonial-author">
+                        <img class="testimonial-avatar"
+                             src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face&q=80"
+                             alt="Amina Hassan">
+                        <div class="testimonial-author-info">
+                            <strong>Amina Hassan</strong>
+                            <span>Nakuru, Kenya</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">The spa experience at Phantom Ridge is unmatched. I came stressed and left completely renewed. The highland air alone is worth the trip. Highly recommended.</p>
+                    <div class="testimonial-author">
+                        <img class="testimonial-avatar"
+                             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face&q=80"
+                             alt="David Kamau">
+                        <div class="testimonial-author-info">
+                            <strong>David Kamau</strong>
+                            <span>Nyeri, Kenya</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-controls">
+            <button class="testimonial-btn" id="testimonial-prev">&#10094;</button>
+            <div class="testimonial-dots" id="testimonial-dots">
+                <span class="testimonial-dot active" onclick="goToTestimonialSlide(0)"></span>
+                <span class="testimonial-dot" onclick="goToTestimonialSlide(1)"></span>
+                <span class="testimonial-dot" onclick="goToTestimonialSlide(2)"></span>
+                <span class="testimonial-dot" onclick="goToTestimonialSlide(3)"></span>
+                <span class="testimonial-dot" onclick="goToTestimonialSlide(4)"></span>
+            </div>
+            <button class="testimonial-btn" id="testimonial-next">&#10095;</button>
+        </div>
+    </div>
+</section>
+
 <section class="section why-us">
     <h2>Why Choose Phantom Ridge Resort</h2>
     <div class="section-line"></div>
     <div class="why-grid">
-        <div class="why-card"><div class="icon">💳</div><h3>No Hidden Fees</h3><p>The price you see is the price you pay. Transparent pricing always.</p></div>
-        <div class="why-card"><div class="icon">✅</div><h3>Instant Confirmation</h3><p>Book in minutes and get instant booking confirmation.</p></div>
-        <div class="why-card"><div class="icon">🔄</div><h3>Free Cancellation</h3><p>Many of our rooms offer free cancellation. No stress.</p></div>
+        <div class="why-card">
+            <div class="icon">💳</div>
+            <h3>No Hidden Fees</h3>
+            <p>The price you see is the price you pay. Transparent pricing always.</p>
+        </div>
+        <div class="why-card">
+            <div class="icon">✅</div>
+            <h3>Instant Confirmation</h3>
+            <p>Book in minutes and get instant booking confirmation.</p>
+        </div>
+        <div class="why-card">
+            <div class="icon">🔄</div>
+            <h3>Free Cancellation</h3>
+            <p>Many of our rooms offer free cancellation. No stress.</p>
+        </div>
     </div>
 </section>
 
@@ -164,5 +367,134 @@ $featuredRooms = [
     <p>Choose from our Affordable, Standard, and Luxury BnB rooms</p>
     <a href="<?php echo BASE_URL; ?>/rooms.php" class="btn-secondary">Explore Our Rooms</a>
 </section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // ----------------------------------------------------
+    // 1. HERO SLIDER LOGIC
+    // ----------------------------------------------------
+    let currentHeroIndex = 0;
+    const heroSlides = document.querySelectorAll('#hero-slider .slide');
+    const heroDots = document.querySelectorAll('#slide-dots .dot');
+    const totalHeroSlides = heroSlides.length;
+    let heroInterval = setInterval(autoHeroNext, 5000);
+
+    function updateHeroDisplay() {
+        heroSlides.forEach((slide, idx) => {
+            if(idx === currentHeroIndex) {
+                slide.classList.add('active');
+            } else {
+                slide.classList.remove('active');
+            }
+        });
+        heroDots.forEach((dot, idx) => {
+            if(idx === currentHeroIndex) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
+
+    window.goToSlide = function(index) {
+        clearInterval(heroInterval);
+        currentHeroIndex = index;
+        updateHeroDisplay();
+        heroInterval = setInterval(autoHeroNext, 5000);
+    };
+
+    window.changeSlide = function(step) {
+        clearInterval(heroInterval);
+        currentHeroIndex = (currentHeroIndex + step + totalHeroSlides) % totalHeroSlides;
+        updateHeroDisplay();
+        heroInterval = setInterval(autoHeroNext, 5000);
+    };
+
+    function autoHeroNext() {
+        currentHeroIndex = (currentHeroIndex + 1) % totalHeroSlides;
+        updateHeroDisplay();
+    }
+
+    // ----------------------------------------------------
+    // 2. TESTIMONIAL CAROUSEL ENGINE
+    // ----------------------------------------------------
+    let currentTestimonialIndex = 0;
+    const track = document.getElementById('testimonials-track');
+    const cards = document.querySelectorAll('.testimonial-card');
+    const dots = document.querySelectorAll('#testimonial-dots .testimonial-dot');
+    const prevBtn = document.getElementById('testimonial-prev');
+    const nextBtn = document.getElementById('testimonial-next');
+    const totalTestimonials = cards.length;
+
+    function getVisibleCards() {
+        return window.innerWidth >= 768 ? 3 : 1;
+    }
+
+    function getMaxIndex() {
+        return Math.max(0, totalTestimonials - getVisibleCards());
+    }
+
+    function updateTestimonialDisplay() {
+        const visibleCards = getVisibleCards();
+        let percentageMove = 0;
+
+        if (visibleCards === 3) {
+            percentageMove = currentTestimonialIndex * (100 / 3);
+        } else {
+            percentageMove = currentTestimonialIndex * 100;
+        }
+
+        track.style.transform = `translateX(-${percentageMove}%)`;
+
+        dots.forEach((dot, idx) => {
+            if (idx === currentTestimonialIndex) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
+
+    window.goToTestimonialSlide = function(index) {
+        const maxIdx = getMaxIndex();
+        currentTestimonialIndex = index > maxIdx ? maxIdx : index;
+        updateTestimonialDisplay();
+    };
+
+    if(nextBtn) {
+        nextBtn.addEventListener('click', function() {
+            const maxIdx = getMaxIndex();
+            if (currentTestimonialIndex >= maxIdx) {
+                currentTestimonialIndex = 0;
+            } else {
+                currentTestimonialIndex++;
+            }
+            updateTestimonialDisplay();
+        });
+    }
+
+    if(prevBtn) {
+        prevBtn.addEventListener('click', function() {
+            const maxIdx = getMaxIndex();
+            if (currentTestimonialIndex <= 0) {
+                currentTestimonialIndex = maxIdx;
+            } else {
+                currentTestimonialIndex--;
+            }
+            updateTestimonialDisplay();
+        });
+    }
+
+    window.addEventListener('resize', function() {
+        const maxIdx = getMaxIndex();
+        if(currentTestimonialIndex > maxIdx) {
+            currentTestimonialIndex = maxIdx;
+        }
+        updateTestimonialDisplay();
+    });
+
+    updateTestimonialDisplay();
+});
+</script>
 
 <?php require_once 'includes/footer.php'; ?>

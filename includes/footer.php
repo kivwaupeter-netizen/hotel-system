@@ -32,6 +32,16 @@
     </div>
 </footer>
 
-<script src="<?php echo BASE_URL; ?>/assets/js/main.js"></script>
+<button id="back-to-top" title="Back to Top">↑</button>
+<div class="lightbox-overlay" id="lightbox-overlay">
+    <div class="lightbox-inner">
+        <button class="lightbox-close" id="lightbox-close">&times;</button>
+        <img src="" alt="" id="lightbox-img">
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+    <button class="lightbox-prev" id="lightbox-prev">&#10094;</button>
+    <button class="lightbox-next" id="lightbox-next">&#10095;</button>
+</div>
 </body>
 </html>
