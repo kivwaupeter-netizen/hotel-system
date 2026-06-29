@@ -11,20 +11,51 @@ define('SITE_ADDRESS', 'Chuka, Kenya');
 
 define('BASE_URL', 'https://hotel-system-ei97.onrender.com');
 
+
+/*
+|--------------------------------------------------------------------------
+| Database Configuration (Render Environment Variables)
+|--------------------------------------------------------------------------
+*/
+
 define('DB_HOST', getenv('DB_HOST'));
 define('DB_USER', getenv('DB_USER'));
 define('DB_PASS', getenv('DB_PASS'));
 define('DB_NAME', getenv('DB_NAME'));
-define('DB_PORT', (int)getenv('DB_PORT'));
+define('DB_PORT', (int) getenv('DB_PORT'));
 
-define('DB_SSL_CA', __DIR__ . '/../ca.pem');
 
-/* VALIDATION (CRASH EARLY IF CONFIG IS BROKEN) */
-if (!DB_HOST || !DB_USER || !DB_NAME) {
-    die("Missing database configuration");
-}
+/*
+|--------------------------------------------------------------------------
+| Application Settings
+|--------------------------------------------------------------------------
+*/
 
 define('UPLOAD_PATH', 'uploads/rooms/');
 define('UPLOAD_MAX_SIZE', 2097152);
 
+
+/*
+|--------------------------------------------------------------------------
+| Timezone
+|--------------------------------------------------------------------------
+*/
+
 date_default_timezone_set('Africa/Nairobi');
+
+
+/*
+|--------------------------------------------------------------------------
+| Production Validation
+|--------------------------------------------------------------------------
+*/
+
+if (
+    empty(DB_HOST) ||
+    empty(DB_USER) ||
+    empty(DB_PASS) ||
+    empty(DB_NAME) ||
+    empty(DB_PORT)
+) {
+    die('Missing database configuration.');
+}

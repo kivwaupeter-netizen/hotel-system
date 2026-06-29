@@ -8,22 +8,21 @@ try {
 
     $conn = mysqli_init();
 
-    // Connection timeout
     $conn->options(
         MYSQLI_OPT_CONNECT_TIMEOUT,
         10
     );
 
-    // Aiven SSL certificate
+    // Enable SSL connection for Aiven
+    // Skip certificate verification because Render does not have Aiven CA installed
     $conn->ssl_set(
-        DB_SSL_CA,
+        null,
         null,
         null,
         null,
         null
     );
 
-    // Connect to Aiven MySQL
     $conn->real_connect(
         DB_HOST,
         DB_USER,
@@ -34,13 +33,12 @@ try {
         MYSQLI_CLIENT_SSL
     );
 
-    // Use UTF-8
     $conn->set_charset("utf8mb4");
 
 
 } catch (mysqli_sql_exception $e) {
 
-    error_log("Database connection error: " . $e->getMessage());
+    error_log("Database connection failed: " . $e->getMessage());
 
     die("Database connection failed. Please try again later.");
 
